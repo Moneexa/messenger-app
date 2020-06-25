@@ -1,0 +1,31 @@
+.converter{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+
+}
+.background-upper-half {
+    /* height: 400px; */
+    /* width: 1280px; */
+    flex:1;
+    background-color: #363A3E;
+  }
+  .headline {
+    height: 47px;
+    width: 570px;
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 47px;
+    text-align: center;
+    
+  }
+  .pickar-logo-white {
+    height: 35px;
+    width: 99.8px;
+   
+  }
+ .calculator{
+     flex:1
+ }
