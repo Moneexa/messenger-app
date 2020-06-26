@@ -83,8 +83,8 @@ export default class Converter extends React.Component {
         return (
             <div className="converter">
                 <div className="background-upper-half">
-                    <div className="pickar-logo-white">
-                        <img src="./pickar-logo-white.png" />
+                    <div className="pickar-logo-white ml-4 mt-4">
+                        <img src="../../pickar_logo_white.png" />
                     </div>
                     <div className="d-flex col-sm-12 col-md-12" style={{ height: "50vh", position: "relative" }}>
                         <p className="headline ml-4" >
@@ -128,7 +128,7 @@ export default class Converter extends React.Component {
                                 </Form>
                             </Container>
                         </div>
-                        <div className="col-md-4" >
+                        <div className="col-md-4 col-sm-12" >
                             <Link className="history" to="/conversion-history">View conversion history></Link>
                         </div>
                     </div>
@@ -137,9 +137,9 @@ export default class Converter extends React.Component {
                 <div className="calculator">
                     <div className="d-flex align-items-center justify-content-center">
                         <div className="container">
-                            <h4> 1 EUR={this.state.result}</h4>
+                            <p className="input"> 1 EUR={this.state.result}</p>
                             <br />
-                            <h1>0.10 USD{this.state.result2}</h1>
+                            <p className="output">0.10 USD{this.state.result2}</p>
                         </div>
                     </div>
                 </div>
