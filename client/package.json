@@ -3,19 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-=======
     "@fortawesome/fontawesome-common-types": "^0.2.29",
     "@fortawesome/fontawesome-free": "^5.13.1",
->>>>>>> inital commit
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-regular-svg-icons": "^5.13.1",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
-<<<<<<< HEAD
-=======
     "@material-ui/core": "^4.10.2",
->>>>>>> inital commit
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -24,10 +18,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
-<<<<<<< HEAD
-=======
     "react-form-hook": "0.0.1",
->>>>>>> inital commit
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
   },
