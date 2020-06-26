@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Row, Container, Button } from 'react-bootstrap'
 import axios from 'axios'
 import makeRequest from '../../shared/service/currencyConverter.service';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 import './converter.css'
@@ -85,24 +85,17 @@ export default class Converter extends React.Component {
                 <div className="background-upper-half">
                     <div className="pickar-logo-white">
                         <img src="./pickar-logo-white.png" />
-
                     </div>
-                    <p className="headline d-flex align-items-center">Convert currencies in real time
-
+                    <div className="d-flex col-sm-12 col-md-12" style={{ height: "50vh", position: "relative" }}>
+                        <p className="headline ml-4" >
+                            Convert currencies in real-time
                     </p>
+                    </div>
                 </div>
-
-
-                <div className="calculator">
-                    <h4>{this.state.result}</h4>
-                    <br />
-                    <h1>{this.state.result2}</h1>
-                </div>
-
-                <div className="d-md-flex align-items-center container">
-                    <div style={{ width: "100%" }} className="d-flex justify-content-between align-items-center">
-                        <div className="p-4 col-md-8" style={{
-                            borderRadius: "5%",
+                <div className="container over-parent">
+                    <div className="parent-div">
+                        <div className="p-4 col-md-8 col-sm-12 form-div" style={{
+                            borderRadius: "5%", backgroundColor: "white",
                             boxShadow: "0 41.8px 33.4px rgba(0, 0, 0, 0.086)"
                         }}>
                             <Container>
@@ -136,11 +129,21 @@ export default class Converter extends React.Component {
                             </Container>
                         </div>
                         <div className="col-md-4" >
-                            <Link style={{ float: "right" }} to="/conversion-history">View conversion history></Link>
+                            <Link className="history" to="/conversion-history">View conversion history></Link>
                         </div>
                     </div>
                 </div>
-                
+
+                <div className="calculator">
+                    <div className="d-flex align-items-center justify-content-center">
+                        <div className="container">
+                            <h4> 1 EUR={this.state.result}</h4>
+                            <br />
+                            <h1>0.10 USD{this.state.result2}</h1>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         )
 

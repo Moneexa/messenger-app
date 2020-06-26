@@ -4,21 +4,48 @@
     height:100%;
 
 }
+.calculator{
+
+height:100vh;
+}
+.parent-div{
+  display: flex;
+  align-items: center;
+  width: 100vw;
+}
+.over-parent{
+  display:flex;
+  align-items: center;
+  margin-top:-2.5rem;
+}
+.history{
+  float:right
+}
+@media only screen and (max-width: 600px) {
+  .parent-div {
+    display:block;
+    width:100vw;
+  }
+}
 .background-upper-half {
     /* height: 400px; */
     /* width: 1280px; */
-    flex:1;
+    flex:0.6;
     background-color: #363A3E;
   }
   .headline {
-    height: 47px;
-    width: 570px;
+    /* height: 47px; */
+    /* width: 570px; */
     color: #FFF;
     font-family: Roboto;
     font-size: 40px;
     font-weight: 700;
     line-height: 47px;
-    text-align: center;
+    align-items: center; 
+    display: flex;
+    /* vertical-align: middle; */
+    /* text-align: center; */
+    width: 100vw;
     
   }
   .pickar-logo-white {
@@ -26,6 +53,4 @@
     width: 99.8px;
    
   }
- .calculator{
-     flex:1
- }
+ 
