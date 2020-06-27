@@ -78,12 +78,13 @@ module.exports = {
      * currencyConverterController.create()
      */
     create: function (req, res) {
-        const outputValue = converter(req.body.from, req.body.inputAmount, req.body.to);
+        const from=req.body.from, to=req.body.to, inputAmount=req.body.inputAmount;
+        const outputValue = converter(from, inputAmount,to);
         var currencyConverter = new currencyConverterModel({
-            date: req.body.date,
-            from: req.body.from,
-            to: req.body.to,
-            inputAmount: req.body.inputAmount,
+            date: "June 25, 20202",
+            from: from,
+            to: to,
+            inputAmount: inputAmount,
             output: outputValue
 
         });
