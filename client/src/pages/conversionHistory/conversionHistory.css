@@ -1,0 +1,22 @@
+.converter-history{
+    height:100%;
+    background-color: #363A3E;
+    display:flex;
+    flex-direction: column;
+
+}
+.converter-history .pickar-logo-white{
+height: 35px;
+flex:0.5;
+}
+
+.converter-history .navigate-back{
+    flex:0.5
+}
+
+
+.converter-history .content{
+    
+    flex:1
+
+}

@@ -1,0 +1,5 @@
+{
+    "mongodb": {
+        "url": "mongodb+srv://root:<root>@cluster0-a0zmu.mongodb.net/<sample_currencyConverter>?retryWrites=true&w=majority"
+    }
+}

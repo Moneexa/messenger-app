@@ -83,9 +83,9 @@ height:100%;
     width: 100vw;
     
   }
-  .pickar-logo-white {
+  .converter .background-upper-half .pickar-logo-white {
     height: 35px;
-    width: 99.8px;
+    /* width: 99.8px; */
     /* margin-top:40px; */
    
   }
