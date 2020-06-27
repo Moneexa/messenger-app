@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './conversionHistory.css';
 import { Row, Container } from 'react-bootstrap'
-export default function converterHistory() {
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
-
+export default function ConverterHistory() {
+    const listify = useStoreActions(actions => actions.currencyInfo.listCurrencyInfo);
+    const list = useStoreState(state => state.currencyInfo.list);
+    const[inputList, setInputList]=useState([]);
+    useEffect(() => {
+       const list=[]
+        setInputList(list);
+    })
     return (
         <div className="converter-history">
             <div className="pickar-logo-white">
@@ -21,7 +28,7 @@ export default function converterHistory() {
             <div className="content">
                 <Row>
                     <Container>
-                        <div class="d-flex flex-flow-row-wrap mb-4">
+                        <div className="d-flex flex-flow-row-wrap mb-4">
                             <p style={{
                                 opacity: "0.5",
                                 color: "#FFF",
@@ -43,26 +50,20 @@ export default function converterHistory() {
                         </div>
                     </Container>
                 </Row>
-                <Row>
-                    <Container>
-                        <div class="d-flex flex-flow-row-wrap my-2" style=
-                            {{ backgroundColor: "white", borderRadius: "10px", height: "59px" }}>
-                            <p style={{ color: "black" }} className="col-md-4 col-sm-4 px-4 py-2">Date</p>
-                            <p style={{ color: "black" }} className="col-md-4 col-sm-4 px-4 py-2">From</p>
-                            <p style={{ color: "black" }} className="col-md-4 col-sm-4 px-4 py-2">To</p>
-                        </div>
-                    </Container>
-                </Row>
-                <Row>
-                    <Container>
-                        <div class="d-flex flex-flow-row-wrap my-2" style=
-                            {{ backgroundColor: "white", borderRadius: "10px", height: "59px" }}>
-                            <p style={{ color: "black" }} className="col-md-4 col-sm-4 px-4 py-2">Date</p>
-                            <p style={{ color: "black" }} className="col-md-4 col-sm-4 px-4 py-2">From</p>
-                            <p style={{ color: "black" }} className="col-md-4 col-sm-4 px-4 py-2">To</p>
-                        </div>
-                    </Container>
-                </Row>
+                {
+                    list.map((element, index) => {
+                        return (<Row key={index}>
+                            <Container>
+                                <div className="d-flex flex-flow-row-wrap my-2" style=
+                                    {{ backgroundColor: "white", borderRadius: "10px", height: "59px" }}>
+                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4">{element.date}</p>
+                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4">{element.inputAmount + " " + element.from}</p>
+                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4">{element.output + " " + element.to}</p>
+                                </div>
+                            </Container>
+                        </Row>)
+                    })
+                }
             </div>
 
         </div >)

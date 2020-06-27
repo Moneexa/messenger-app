@@ -1,5 +1,5 @@
 import React from 'react'
-import Converter from '../converter/converter'
+import {Converter} from '../converter/converter'
 import conversionHistory from '../conversionHistory/conversionHistory'
 import {Link, Switch, BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import './layout.css'

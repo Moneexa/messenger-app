@@ -5,35 +5,7 @@ var currencyConverterModel = require('./currencyConverterModel.js');
  *
  * @description :: Server-side logic for managing currencyConverters.
  */
-function converter(from, input, to) {
-    const from = from;
-    const input = input;
-    const output = "";
-    const to = to;
-    const eur_usd = 1.12, eur_chf = 1.06, chf_usd = 1.05;
-    if (from === "EUR" && to === "USD") {
-        output = input * eur_usd;
-    }
-    else if (from === "USD" && to === "EUR") {
-        output = input / eur_usd;
-    }
-    else if (from === "EUR" && to === "CHF") {
-        output = input * eur_chf;
-    }
-    else if (from === "CHF" && to === "EUR") {
-        output = input / eur_chf;
-    }
-    else if (from === "CHF" && to === "USD") {
-        output = input * chf_usd;
-    }
-    else if (from === "USD" && to === "CHF") {
-        output = input / chf_usd;
-    }
-    else {
-        output = ""
-    }
-    return output;
-}
+
 module.exports = {
 
     /**
@@ -78,14 +50,13 @@ module.exports = {
      * currencyConverterController.create()
      */
     create: function (req, res) {
-        const from=req.body.from, to=req.body.to, inputAmount=req.body.inputAmount;
-        const outputValue = converter(from, inputAmount,to);
+        
         var currencyConverter = new currencyConverterModel({
-            date: "June 25, 20202",
-            from: from,
-            to: to,
-            inputAmount: inputAmount,
-            output: outputValue
+            date: "June 25, 2020",
+            from: req.body.from,
+            to: req.body.to,
+            inputAmount: req.body.inputAmount,
+            output: req.body.output
 
         });
 

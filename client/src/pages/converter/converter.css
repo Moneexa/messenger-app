@@ -5,9 +5,10 @@
 
 }
 .calculator{
-margin-top:3.5rem;
+margin-top:2.5rem;
 margin-bottom:3.5rem;
 height:100%;
+flex:1;
 }
 .parent-div{
   display: flex;
@@ -33,6 +34,7 @@ height:100%;
     /* width:100vw; */
   }
   .history{
+    margin-top:1.5rem;
     float:right!important;
   }
   form{
@@ -48,19 +50,17 @@ height:100%;
 .background-upper-half {
     /* height: 400px; */
     /* width: 1280px; */
-    flex:0.6;
+    flex:0.4;
     background-color: #363A3E;
   }
   .calculator .input{
     height: 23px;
-  width: 69px;
   color: #363A3E;
   font-size: 20px;
   line-height: 23px;
   }
   .calculator .output{
     height: 47px;
-  width: 237px;
   color: #363A3E;
   font-size: 40px;
   font-weight: 700;

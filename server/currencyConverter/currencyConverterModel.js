@@ -6,7 +6,7 @@ var currencyConverterSchema = new Schema({
 	'from' : String,
 	'to' : String,
 	'inputAmount' : String,
-	'output' : String
+	'output' : Number
 });
 
 module.exports = mongoose.model('currencyConverter', currencyConverterSchema);

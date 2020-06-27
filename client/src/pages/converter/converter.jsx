@@ -4,8 +4,11 @@ import makeRequest from '../../shared/service/currencyConverter.service';
 import { Link, withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import './converter.css'
-export default function Converter () {
+export function Converter() {
+    const post = useStoreActions(actions => actions.currencyInfo.post);
+    const obj = useStoreState(state => state.currencyInfo.obj);
 
     const [inputValue, setInputValue] = useState(0);
     const [inputToCurrency, setInputToCurrency] = useState("EUR");
@@ -13,7 +16,7 @@ export default function Converter () {
     const [outputValue, setOutputValue] = useState(0);
     const [result, setResult] = useState("");
     const [result2, setResult1] = useState("");
-
+    const [success, setSuccess] = useState(false);
     function handleValueOnChange(e) {
         setInputValue(e.target.value)
     }
@@ -30,18 +33,22 @@ export default function Converter () {
         setInputFromCurrency(from);
         handleConversion(event);
     }
-    
+
     function handleConversion(e) {
         e.preventDefault();
         const from = inputFromCurrency;
         const to = inputToCurrency;
-        console.log(outputValue)
-        setResult(inputValue+" "+from+" "+ "=");
-        setResult1(outputValue + " " + to);
+        const input = inputValue;
+        const _obj = {
+            date: (new Date()).getMonth() + " " + (new Date()).getDate() + 1 + "," + (new Date()).getFullYear(),
+            from: from,
+            to: to,
+            inputAmount: input
+        }
+        post(_obj);
 
-
-
-        // res.then(resp=>console.log(resp))
+        setSuccess(true);
+        setResult(inputValue + " " + from + " " + "=");
     }
     return (
         <div className="converter">
@@ -87,7 +94,7 @@ export default function Converter () {
                                         <option>CHF</option>
                                     </Form.Control>
                                 </Form.Group>
-                                <button type="submit" className="btn btn-danger col-md-3 col-sm-3">Convert</button>
+                                <button type="submit" className="btn btn-danger col-md-3 col-sm-3 mt-3">Convert</button>
                             </Form>
                         </Container>
                     </div>
@@ -103,12 +110,18 @@ export default function Converter () {
 
             <div className="calculator">
                 <div className="d-flex align-items-center justify-content-center">
-                    <div className="container">
-                        <p className="input"> {result}</p>
-                        <br />
-                        <p className="output">{result2}</p>
-                    </div>
+                    {
+                        success ?
+                            <div className="container">
+                                <p className="input">{result}</p>
+                                <br />
+                                <p className="output">{obj.output + " " + inputToCurrency}</p>
+                            </div>
+                            : ""
+                    }
+
                 </div>
+
             </div>
 
         </div>

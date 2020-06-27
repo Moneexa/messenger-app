@@ -19,6 +19,19 @@ flex:0.3;
 .converter-history .content{
     /* display: flex; */
 align-items: center;    
-    flex:1
+flex:1
+
+}
+
+.converter-history .content.row.container p{
+    display: flex;
+    align-items: center;
+    padding-top:3.5 rem;
+}
+@media only screen and (max-width: 600px) {
+.converter-history .content{
+    justify-content: center;
+    margin: 0 1.5rem;
+}
 
 }
