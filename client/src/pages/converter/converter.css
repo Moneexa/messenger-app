@@ -55,7 +55,6 @@ height:100%;
     height: 23px;
   width: 69px;
   color: #363A3E;
-  font-family: Roboto;
   font-size: 20px;
   line-height: 23px;
   }
@@ -63,7 +62,6 @@ height:100%;
     height: 47px;
   width: 237px;
   color: #363A3E;
-  font-family: Roboto;
   font-size: 40px;
   font-weight: 700;
   line-height: 47px;
@@ -72,7 +70,6 @@ height:100%;
     /* height: 47px; */
     /* width: 570px; */
     color: #FFF;
-    font-family: Roboto;
     font-size: 40px;
     font-weight: 700;
     line-height: 47px;
