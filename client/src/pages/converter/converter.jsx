@@ -13,9 +13,7 @@ export function Converter() {
     const [inputValue, setInputValue] = useState(0);
     const [inputToCurrency, setInputToCurrency] = useState("EUR");
     const [inputFromCurrency, setInputFromCurrency] = useState("EUR");
-    const [outputValue, setOutputValue] = useState(0);
     const [result, setResult] = useState("");
-    const [result2, setResult1] = useState("");
     const [success, setSuccess] = useState(false);
     function handleValueOnChange(e) {
         setInputValue(e.target.value)

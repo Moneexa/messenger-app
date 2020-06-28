@@ -29,7 +29,7 @@ flex:1
     align-items: center;
     padding-top:3.5 rem;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
 .converter-history .content{
     justify-content: center;
      margin: 0 1.5rem; 
