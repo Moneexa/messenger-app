@@ -7,11 +7,10 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 export default function ConverterHistory() {
     const listify = useStoreActions(actions => actions.currencyInfo.listCurrencyInfo);
     const list = useStoreState(state => state.currencyInfo.list);
-    const[inputList, setInputList]=useState([]);
+    const [inputList, setInputList] = useState([]);
     useEffect(() => {
-       const list=[]
-        setInputList(list);
-    })
+        listify()
+    }, [])
     return (
         <div className="converter-history">
             <div className="pickar-logo-white">
@@ -52,18 +51,19 @@ export default function ConverterHistory() {
                 </Row>
                 {
                     list.map((element, index) => {
-                        return (<Row key={index}>
+                        return (<Row key={index} >
                             <Container>
                                 <div className="d-flex flex-flow-row-wrap my-2" style=
                                     {{ backgroundColor: "white", borderRadius: "10px", height: "59px" }}>
-                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4">{element.date}</p>
-                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4">{element.inputAmount + " " + element.from}</p>
-                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4">{element.output + " " + element.to}</p>
+                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4 py-2">{element.date}</p>
+                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4 py-2">{element.inputAmount + " " + element.from}</p>
+                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4 py-2">{element.output + " " + element.to}</p>
                                 </div>
                             </Container>
                         </Row>)
                     })
                 }
+
             </div>
 
         </div >)
