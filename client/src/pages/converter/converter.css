@@ -23,7 +23,7 @@ flex:1;
 .history{
   float:right
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   .svg-inline--fa.fa-w-16
   {
   transform: rotate(90deg);

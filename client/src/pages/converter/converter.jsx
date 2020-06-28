@@ -56,7 +56,7 @@ export function Converter() {
                 <div className="pickar-logo-white ml-4 mt-4">
                     <img src="../../pickar_logo_white.png" />
                 </div>
-                <div className="d-flex col-sm-12 col-md-12" style={{ height: "50vh", position: "relative" }}>
+                <div className="d-flex col-sm-12 col-md-12" style={{ height: "50vh" }}>
                     <p className="headline ml-4" >
                         Convert currencies in real-time
                     </p>
