@@ -28,6 +28,9 @@ flex:1
     display: flex;
     align-items: center;
     padding-top:3.5 rem;
+    color: #363A3E;
+  font-size: 16px;
+  line-height: 19px;
 }
 @media only screen and (max-width: 700px) {
 .converter-history .content{

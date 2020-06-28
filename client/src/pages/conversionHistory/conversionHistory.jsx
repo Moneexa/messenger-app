@@ -54,10 +54,10 @@ export default function ConverterHistory() {
                         return (<Row key={index} >
                             <Container>
                                 <div className="d-flex flex-flow-row-wrap my-2" style=
-                                    {{ backgroundColor: "white", borderRadius: "10px", height: "59px" }}>
-                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4 py-2">{element.date}</p>
-                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4 py-2">{element.inputAmount + " " + element.from}</p>
-                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4 py-2">{element.output + " " + element.to}</p>
+                                    {{ backgroundColor: "white", borderRadius: "10px", height: "auto" }}>
+                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4  col-sx-4 py-2">{element.date}</p>
+                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4 col-sx-4 py-2">{element.inputAmount + " " + element.from}</p>
+                                    <p style={{ color: "black" }} className="col-md-4 col-sm-4 col-xs-4 py-2">{element.output + " " + element.to}</p>
                                 </div>
                             </Container>
                         </Row>)
