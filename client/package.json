@@ -2,6 +2,8 @@
   "name": "currency-converter",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4242",
+
   "dependencies": {
     "@fortawesome/fontawesome-common-types": "^0.2.29",
     "@fortawesome/fontawesome-free": "^5.13.1",
@@ -20,7 +22,9 @@
     "react-dom": "^16.13.1",
     "react-form-hook": "0.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "socket.io-client": "^2.3.1",
+    "toastr": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

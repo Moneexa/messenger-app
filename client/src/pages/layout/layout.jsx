@@ -1,6 +1,6 @@
 import React from 'react'
-import {Converter} from '../converter/converter'
-import conversionHistory from '../conversionHistory/conversionHistory'
+import {UserLogin} from '../userLogin/userLogin'
+import ChatInterface from '../chatInterface/chatInterface'
 import {Link, Switch, BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import './layout.css'
 export default class Layout extends React.Component{
@@ -8,9 +8,9 @@ export default class Layout extends React.Component{
         return(<div className="layout">
         <Router>
             <Switch>
-             <Redirect from="/" exact to="/converter" />
-             <Route path="/converter" component={Converter} />
-             <Route path="/conversion-history" component={conversionHistory} />
+             <Redirect from="/" exact to="/login" />
+             <Route path="/login" component={UserLogin} />
+             <Route path="/chat-interface/:userName/:action" exact={true} component={ChatInterface} />
             </Switch>
         </Router>
 
