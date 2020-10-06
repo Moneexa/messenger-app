@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Form, Row, Container, Button } from 'react-bootstrap'
-import { Link, BrowserRouter as Router } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Form, Container, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { useStoreActions } from 'easy-peasy';
 
-//import './userLogin.css'
 export function UserLogin() {
     const [name, setName] = useState("")
     const [span, setSpan] = useState("")
