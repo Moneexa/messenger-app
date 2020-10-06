@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Row, Container, Button } from 'react-bootstrap'
 import { Link, BrowserRouter as Router } from 'react-router-dom'
-import { useStoreActions, useStoreState } from 'easy-peasy';
-import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { useStoreActions } from 'easy-peasy';
+
 //import './userLogin.css'
 export function UserLogin() {
     const [name, setName] = useState("")
+    const [span, setSpan] = useState("")
+    const register = useStoreActions(actions => actions.user.signup);
+
     function handleInputChange(e) {
         setName(e.target.value)
     }
+    function handleSubmit() {
+        register(name)
+        setSpan("now login")
+
+    }
+
     return (
         <div className="login">
-            <Container className="d-flex align-items-center" style={{height:"50vh"}}>
+            <Container className="d-flex align-items-center" style={{ height: "50vh" }}>
                 <Form className="w-100">
                     <Form.Group>
                         <Form.Label>Enter your userName</Form.Label>
@@ -20,12 +28,15 @@ export function UserLogin() {
 
                     </Form.Group>
                     <Link to={`/chat-interface/${name}/login`}>
-                    <Button type="submit" className="btn btn-success mx-2">Login</Button>
+                        <Button type="submit" className="btn btn-success mx-2">Login</Button>
                     </Link>
-                    <Link to={`/chat-interface/${name}/register`}>
 
-                    <Button type="submit" className="btn btn-primary mx-2">New Account</Button>
-                    </Link>
+                    <Button type="button" className="btn btn-primary mx-2" onClick={
+
+                        handleSubmit
+                    }>New Account</Button>
+                    <span>{span !== "" ? span : ''}</span>
+
 
                 </Form>
             </Container>

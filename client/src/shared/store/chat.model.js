@@ -8,48 +8,52 @@ const { action, thunk } = require("easy-peasy");
 export const ChatModel = {
     activeRoom: {
         id: null,
-        sender: "",
-        receiver: ""
+        initiator: {},
+        receiver: {},
+        texts: [],
     },
     messages: [], rooms: [],
-    pushMessage: action((state, payload) => {
+    pushMessages: action((state, payload) => {
         state.messages = [...state.messages, payload];
         console.log(state.messages)
     }),
     setMessages: action((state, payload) => {
         state.messages = payload;
     }),
-    setRooms: action((state, payload) => {
-        state.rooms = payload;
-    }),
     setActiveRoom: action((state, payload) => {
-        state.activeRoom = payload;
+        state.activeRoom = payload
+        console.log(state.activeRoom)
     }),
-    createChat: thunk(async (actions, payload) => {
-        axios.post(`${config.apiUrl}/chats`, payload)
+    setUserSocket: thunk(async (actions, payload) => {
+        socket.emit('this is username', payload);
     }),
-    send: thunk(async (actions, { id, value, sender, recipient }) => {
-         socket.emit('send', {
-             id,
-             value,
-
-             sender,
-             recipient,
-         });
-        actions.pushMessage({
+    getChat: thunk(async (actions, payload) => {
+        try {
+            const chat = await axios.get(`${config.apiUrl}/chats/${payload.userName}/${payload.receiver}`);
+            actions.setActiveRoom(chat.data);
+            actions.setMessages(chat.data.texts)
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }),
+    send: thunk(async (actions, { value, sender, recipient }) => {
+        socket.emit('send', {
+            value,
             sender,
             recipient,
-            text:value
+        });
+        actions.pushMessages({
+            sender,
+            recipient,
+            value: value,
         })
     }),
+    
 }
-socket.on('connect', () => {
-    console.log("Connection joined");
-    const sender = localStorage.getItem("activeSender");
-    const receiver = localStorage.getItem("activeRecipient")
-    socket.emit('joinRecipientRooms', { sender, receiver });
-
+socket.on('receive', (data) => {
+    console.log(data)
+    store.dispatch({ type: '@action.chat.pushMessages', payload: { sender: data.sender, recipient: data.recipient, value: data.value } });
 })
-
 
 

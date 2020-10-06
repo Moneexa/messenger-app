@@ -8,41 +8,45 @@ const { action, thunk } = require("easy-peasy");
 
 
 let user = {
-    userName:"",
-    id:""
+    userName: "",
+    id: ""
 };
 
 
 
 export const UserModel = {
-    
+
     id: user.id,
     userName: user.userName,
-    loading:false, searchedUser:"",
-    recipientId:"",
+    loading: false, searchedUser: "",
+    recipientId: "", users: [],
     toggleLoading: action((state, payload) => {
         state.loading = payload;
     }),
-    
-    updateUser: action((state,payload)=>{
+
+    updateUser: action((state, payload) => {
         state.userName = payload.userName
-        state.id=payload._id
-        localStorage.setItem("activeSender", state.id)
+        state.id = payload._id
+        //localStorage.setItem("activeSender", state.id)
     }),
-    updateSearchedUser: action((state,payload)=>{
+    updateSearchedUser: action((state, payload) => {
         state.searchedUser = payload.userName;
 
     }),
-    updateRecipient: action((state,payload)=>{
-        state.recipientId=payload._id
+    setUsers: action((state, payload) => {
+        state.users = payload
+    }),
+
+    updateRecipient: action((state, payload) => {
+        state.recipientId = payload._id
         console.log(payload)
-        localStorage.setItem("activeRecipient",state.recipientId )
+        //localStorage.setItem("activeRecipient",state.recipientId )
     }),
     login: thunk(async (actions, payload) => {
         try {
             actions.toggleLoading(true);
-            const userName=payload;
-            
+            const userName = payload;
+
             const res = await axios.get(`${config.apiUrl}/user/${userName}`)
             console.log(res.data)
             actions.updateUser(res.data);
@@ -58,7 +62,7 @@ export const UserModel = {
         console.log(userName)
         try {
             actions.toggleLoading(true);
-            const user=await axios.post(`${config.apiUrl}/user/`, { userName })
+            const user = await axios.post(`${config.apiUrl}/user/`, { userName })
             actions.updateUser(user.data);
             //console.log(res)
             toastr.success("Signup Successfully")
@@ -67,20 +71,35 @@ export const UserModel = {
         }
         actions.toggleLoading(false);
     }),
-    searchUser: thunk(async(actions, payload)=>{
-        try{
-            const user=await axios.get(`${config.apiUrl}/user/${payload}`);
+    searchUser: thunk(async (actions, payload) => {
+        try {
+            const user = await axios.get(`${config.apiUrl}/user/${payload}`);
             console.log(user.data)
             actions.updateSearchedUser(user.data)
         }
-        catch(error){
+        catch (error) {
             console.log(error)
         }
     }),
-    setRecipient: thunk(async(actions, payload)=>{
-        const user=await axios.get(`${config.apiUrl}/user/${payload}`);
+    setRecipient: thunk(async (actions, payload) => {
+        const user = await axios.get(`${config.apiUrl}/user/${payload}`);
         console.log(user.data)
         actions.updateRecipient(user.data)
+    }),
+    listUsers: thunk(async (actions, payload) => {
+        try {
+            console.log("listUsers called")
+            const users = await axios.get(`${config.apiUrl}/user/${payload}/find-list`);
+            actions.setUsers(users.data)
+
+
+        }
+        catch (error) {
+
+        }
+
+
     })
-    
+
+
 };

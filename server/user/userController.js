@@ -8,7 +8,7 @@ var userModel = require('./userModel.js');
 
 module.exports = {
     list: function (req, res) {
-        userModel.find(function (err, user) {
+        userModel.find({ "userName": { "$ne": req.params.userName } }, function (err, user) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting user.',

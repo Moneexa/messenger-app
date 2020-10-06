@@ -1,37 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import './chatInterface.css';
-import { Form } from 'react-bootstrap'
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import './chatInterface.css';
 
-
 export default function ChatInterface({ match }) {
     const login = useStoreActions(actions => actions.user.login);
-    const register = useStoreActions(actions => actions.user.signup);
     const userName = match.params.userName;
     const messages = useStoreState(state => state.chat.messages);
     const [lastMessage, setLastMessage] = useState(null);
-    const [conn, setConn] = useState("")
-    const searchUser = useStoreActions(actions => actions.user.searchUser)
     const [message, setMessage] = useState('');
-    const searchedUser = useStoreState(state => state.user.searchedUser)
     const [recipient, setRecipient] = useState("")
-    const setRecipientInfo = useStoreActions(actions => actions.user.setRecipient)
     const send = useStoreActions(actions => actions.chat.send)
-    const rooms = useStoreState(state => state.chat.rooms);
     const room = useStoreState(state => state.chat.activeRoom);
-    const changeActiveRoom = useStoreActions(actions => actions.chat.changeActiveRoom);
-    const setActiveRoom = useStoreActions(actions => actions.chat.setActiveRoom);
-    const createChat = useStoreActions(actions => actions.chat.createChat)
-
+    const setUserSocket = useStoreActions(actions => actions.chat.setUserSocket)
+    const localStorageUser = useStoreState(state => state.user.id)
+    const users = useStoreState(state => state.user.users)
+    const listUsers = useStoreActions(actions => actions.user.listUsers);
+    const getChat = useStoreActions(actions => actions.chat.getChat)
     useEffect(() => {
-        if (match.params.action === "login") {
-            login(match.params.userName)
-        }
-        else if (match.params.action === "register") {
-            register(match.params.action);
-        }
+        login(match.params.userName)
     }, [])
     useEffect(() => {
         if (lastMessage) {
@@ -39,81 +26,49 @@ export default function ChatInterface({ match }) {
         }
     })
     useEffect(() => {
-        if (room.id)
-            changeActiveRoom(room)
-    }, [room])
-
-    function handleSubmit(e) {
-        e.preventDefault();
-
-        searchUser(conn)
-
-    }
-    function handleChange(e) {
-        setConn(e.target.value)
-    }
+        console.log("hi!")
+        listUsers(userName)
+    },[users])
+    useEffect(() => {
+        if (userName) {
+            setUserSocket(userName)
+        }
+    }, [])
     function sendMessage(event) {
         event.preventDefault();
         if (message) {
-
-
-            send({ id: room.id, value: message, sender: userName, recipient: recipient });
-
+            send({ value: message, sender: userName, recipient: recipient });
             setMessage('');
-
         }
     }
-    function handleSearchedUserClick() {
-        if (searchedUser !== "") {
-            setRecipient(searchedUser)
-            document.getElementById("searchedUser").innerHTML = ""
-            setRecipientInfo(searchedUser);
-
-            setConn("")
-
-        }
-
+    function handleSetActiveRoom(value) {
+        setRecipient(value.userName)
+        getChat({ userName: localStorageUser, receiver: value._id })
     }
     function getContactName(value) {
-        //console.log(value.sender)
-        return value.sender
-
-    }
-    function getTitle(value) {
         return value.sender
     }
-
     return (<>
         <div className="h-100 w-100 position-absolute d-flex">
             <div className={`m-2 flex-grow-1 d-flex shadow-sm container}`}>
                 <div className={`d-flex flex-column sidebar col-md-3`}>
-
                     <div className="my-1">
-                        <Form onSubmit={handleSubmit} className="d-flex justify-content-center w-100 mt-3 border-radius-21">
-                            <Form.Group>
-                                <Form.Control type="text" value={conn} onChange={handleChange} placeholder={`Search for connection`} />
-
-                            </Form.Group>
-                        </Form>
+                        <h3>List of Connected Users</h3>
                         <div className="d-flex justify-content-center mr-2 my-3 searchedUser">
-                            <p id="searchedUser" onClick={handleSearchedUserClick}> {
-                                searchedUser ? searchedUser : ''
-                            } </p>
+                            <div className={`flex-grow-1 rooms`}>
+                                {
+                                    users.map((value, index) => {
+                                        return <div onClick={() =>
+                                            handleSetActiveRoom(value)} key={index} className={`room ${room.id === value.id ? 'active' : ''}`}>
+                                            <div className={`title`}>{
+                                                value.userName
+                                            }
+                                            </div>
+                                        </div>
+                                    })
+                                }
+                            </div>
                         </div>
-                    </div>
-                    <div className={`flex-grow-1 rooms`}>
-                        {
-                            rooms.map((value, index) => {
-                                return <div onClick={() => setActiveRoom(value)} key={index} className={`room ${room.id === value.id ? 'active' : ''}`}>
-                                    <div className={`title`}>
-                                        {getTitle(value)}
-                                    </div>
-                                    <div className={`subTitle`}>{value.title}</div>
-                                </div>
-                            })
-
-
-                        }
                     </div>
                 </div>
                 <div className={`flex-grow-1 d-flex flex-column messagesContainer col-md-9`}>
@@ -124,21 +79,21 @@ export default function ChatInterface({ match }) {
                     </div>
                     <div className={`flex-grow-1 messages`}>
                         {
-                            messages.map((message, index) => (
-                                <div key={index} className={`d-flex flex-column message`} ref={(el) => { setLastMessage(el); }}>
+                            recipient ?
+                                messages.map((message, index) => (
+                                    <div key={index} className={`d-flex flex-column message`} ref={(el) => { setLastMessage(el); }}>
+                                        <div className={`nameAndText`}>
+                                            <div className={`font-weight-bold`}>{getContactName(message)}</div>
+                                            <div className={`text`}>
 
-                                    <div className={`nameAndText`}>
-                                        <div className={`font-weight-bold`}>{getContactName(message)}</div>
-                                        <div className={`text`}>
-
-                                            {message.text}
+                                                {message.value}
+                                            </div>
                                         </div>
+                                        {index !== (messages.length - 1) ? <div className={`borderBottom`}></div> : ''}
                                     </div>
-                                    {index !== (messages.length - 1) ? <div className={`borderBottom`}></div> : ''}
-                                </div>
-                            ))
+                                ))
+                                : ''
                         }
-
                     </div>
                     <form className={`d-flex p-4 messageInputContainer`} onSubmit={(event) => sendMessage(event)}>
                         <input value={message} onChange={(event => setMessage(event.target.value))} className={`rounded-0 flex-grow-1 mr-2`} type="text" />

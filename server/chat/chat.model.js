@@ -2,22 +2,26 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ChatSchema = new Schema({
-    'initiator':{
+    'initiator': {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'User'
     },
-    'receiver':{
+    'receiver': {
         type: Schema.Types.ObjectId,
         required: true,
-        ref:'User'
+        ref: 'User'
     },
-    'texts': [{
-        date: Date,
-        sender:String,
-        recipient:String,
-        value: String
-    }]
+    'texts':
+
+        [{
+            date: Date,
+            sender: String,
+            recipient: String,
+            value: String
+
+        }]
+
 });
 
 module.exports = mongoose.model('Chat', ChatSchema);

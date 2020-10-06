@@ -5,7 +5,7 @@ var userController = require('./userController');
 /*
  * GET
  */
-router.get('/', userController.list);
+router.get('/:userName/find-list', userController.list);
 
 /*
  * GET

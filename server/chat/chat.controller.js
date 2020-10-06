@@ -6,7 +6,8 @@ const axios = require('axios')
 
 module.exports = {
     create,
-    listMessages
+    listRooms,
+    getChat
 }
 
 
@@ -21,7 +22,7 @@ async function create(req, res) {
 
         let existingChat = await ChatModel.findOne({ initiator: initiator, receiver: receiver });
         if (existingChat) {
-            return res.status(400).send('Chat already exists you cannot create again');
+            return res.status(200).send(existingChat);
         }
         const sender = await UserModel.findOne({ _id: initiator })
         const recipient = await UserModel.findOne({ _id: receiver })
@@ -49,15 +50,37 @@ async function create(req, res) {
         });
     }
 }
+async function getChat(req, res) {
+    let chat = await ChatModel.findOne({
+        '$or': [
+            { initiator: req.params.userName, receiver: req.params.receiver }, {
+                receiver: req.params.userName, initiator: req.params.receiver
+            }
+        ]
 
-async function listMessages(req, res) {
-    ChatModel.findOne({ _id: req.params.id }, function (err, chat) {
-        if (err || !chat) {
-            return res.status(500).json({
-                message: 'Error when getting campaign.',
-                error: err
-            });
-        }
-        return res.json(chat.texts);
-    });
+    })
+    if (!chat) {
+        
+        chat = new ChatModel({
+            initiator: req.params.userName, 
+            receiver: req.params.receiver,
+            texts: []
+        });
+
+        await chat.save();
+    }
+    return res.json(chat);
+}
+async function listRooms(req, res) {
+    const room = await ChatModel.find({
+        '$or': [
+            { initiator: req.params.userName }, {
+                receiver: req.params.userName
+            }
+        ]
+    }).populate("initiator receiver")
+
+
+    return res.json(room);
+
 }
