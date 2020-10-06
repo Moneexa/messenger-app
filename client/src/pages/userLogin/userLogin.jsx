@@ -14,7 +14,7 @@ export function UserLogin() {
     }
     function handleSubmit() {
         register(name)
-        setSpan("now login")
+        setSpan("now login right now")
 
     }
 
