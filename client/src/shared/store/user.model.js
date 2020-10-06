@@ -27,21 +27,13 @@ export const UserModel = {
     updateUser: action((state, payload) => {
         state.userName = payload.userName
         state.id = payload._id
-        //localStorage.setItem("activeSender", state.id)
     }),
-    updateSearchedUser: action((state, payload) => {
-        state.searchedUser = payload.userName;
-
-    }),
+    
     setUsers: action((state, payload) => {
         state.users = payload
     }),
 
-    updateRecipient: action((state, payload) => {
-        state.recipientId = payload._id
-        console.log(payload)
-        //localStorage.setItem("activeRecipient",state.recipientId )
-    }),
+    
     login: thunk(async (actions, payload) => {
         try {
             actions.toggleLoading(true);
@@ -71,21 +63,7 @@ export const UserModel = {
         }
         actions.toggleLoading(false);
     }),
-    searchUser: thunk(async (actions, payload) => {
-        try {
-            const user = await axios.get(`${config.apiUrl}/user/${payload}`);
-            console.log(user.data)
-            actions.updateSearchedUser(user.data)
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }),
-    setRecipient: thunk(async (actions, payload) => {
-        const user = await axios.get(`${config.apiUrl}/user/${payload}`);
-        console.log(user.data)
-        actions.updateRecipient(user.data)
-    }),
+    
     listUsers: thunk(async (actions, payload) => {
         try {
             console.log("listUsers called")
@@ -95,6 +73,7 @@ export const UserModel = {
 
         }
         catch (error) {
+            console.error(error)
 
         }
 

@@ -4,8 +4,8 @@ var chatController = require('./chat.controller');
 /*
  * POST
  */
-router.post('/',  chatController.create);
-router.get('/:userName',chatController.listRooms);
+// router.post('/',  chatController.create);
+// router.get('/:userName',chatController.listRooms);
 router.get('/:userName/:receiver', chatController.getChat)
 /*
  * PUT

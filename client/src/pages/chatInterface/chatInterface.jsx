@@ -28,7 +28,7 @@ export default function ChatInterface({ match }) {
     useEffect(() => {
         console.log("hi!")
         listUsers(userName)
-    },[users])
+    },[])
     useEffect(() => {
         if (userName) {
             setUserSocket(userName)
