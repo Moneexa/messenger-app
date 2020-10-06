@@ -32,11 +32,13 @@ export const ChatModel = {
             const chat = await axios.get(`${config.apiUrl}/chats/${payload.userName}/${payload.receiver}`);
             actions.setActiveRoom(chat.data);
             actions.setMessages(chat.data.texts)
+            
         }
         catch (error) {
             console.error(error)
         }
     }),
+    
     send: thunk(async (actions, { value, sender, recipient }) => {
         socket.emit('send', {
             value,
@@ -49,7 +51,7 @@ export const ChatModel = {
             value: value,
         })
     }),
-    
+
 }
 socket.on('receive', (data) => {
     console.log(data)

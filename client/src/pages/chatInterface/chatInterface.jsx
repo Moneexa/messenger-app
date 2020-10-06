@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './chatInterface.css';
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { action, useStoreActions, useStoreState } from 'easy-peasy';
 import './chatInterface.css';
 
 export default function ChatInterface({ match }) {
@@ -28,7 +28,7 @@ export default function ChatInterface({ match }) {
     useEffect(() => {
         console.log("hi!")
         listUsers(userName)
-    },[])
+    }, [])
     useEffect(() => {
         if (userName) {
             setUserSocket(userName)
