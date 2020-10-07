@@ -1,6 +1,5 @@
 import axios from 'axios';
 import config from '../config.json';
-import * as toastr from 'toastr';
 import io from 'socket.io-client';
 import { store } from '../store/store'
 const socket = io(config.socketHost);

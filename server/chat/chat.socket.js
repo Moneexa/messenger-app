@@ -1,7 +1,5 @@
 var ChatModel = require('./chat.model.js');
 var UserModel = require('../user/userModel.js');
-const userModel = require('../../../chat-app/user/userModel.js');
-const chatModel = require('./chat.model.js');
 module.exports = {
     init: init
 }
@@ -70,4 +68,3 @@ async function send(socket, data) {
         console.error(error)
     }
 }
-//ChatModel.find().populate("initiator").then(resp=>console.log(resp))
